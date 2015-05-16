@@ -9,8 +9,8 @@
 <div class="container">
 
 <?php if (isset($flashMessage)): ?>
-<div class="flash-box flash-<?=$flashMessage["state"]?>">
-    <span class="flash-kind"><?=strtoupper($flashMessage["state"])?>: </span>
+<div class="flash-box flash-<?=$flashMessage["status"]?>">
+    <span class="flash-kind"><?=strtoupper($flashMessage["status"])?>: </span>
     <?= $flashMessage["message"] ?>
 </div>
 <?php endif; ?>
