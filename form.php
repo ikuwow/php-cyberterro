@@ -2,9 +2,19 @@
 $dsn = 'pgsql:dbname=guest_book;host=localhost';
 $pdo = new PDO($dsn);
 
-$flashMessage = "";
+/*
+$flashMessage = [
+    "message" => "flash!",
+    "state" => "info"
+];
+ */
 
 // 投稿処理
+if (!empty($_POST)) {
+    echo "Posted!!<br/>";
+    var_dump($_POST);
+}
+
 // insert
 // 同じ名前での投稿を無効にする
 
