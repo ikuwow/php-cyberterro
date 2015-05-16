@@ -39,7 +39,7 @@
 
 
 <div class="post-list-box">
-<h2>Post List</h2>
+<h2>Post List (<?= count($posts) ?>)</h2>
 <?php if(isset($posts)): ?>
     <?php foreach($posts as $post): ?>
         <div class="single-post">
@@ -74,8 +74,14 @@
 
     <h5>$_COOKIE</h5>
     <pre><?= var_dump($_COOKIE) ?></pre>
+
     <h5>$_POST</h5>
     <pre><?= var_dump($_POST) ?></pre>
+
+    <?php if (false): ?>
+    <h5>$_SESSION</h5>
+    <pre><?= var_dump($_SESSION) ?></pre>
+    <?php endif; ?>
 </div>
 
 
