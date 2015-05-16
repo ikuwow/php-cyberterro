@@ -43,7 +43,10 @@
 <?php if(isset($posts)): ?>
     <?php foreach($posts as $post): ?>
         <div class="single-post">
-            <p></p>aaa
+        <h3><?= $post['title'] ?></h3>
+        <p><?= $post['name'] ?></p>
+        <p><?= $post['body'] ?></p>
+        <p><?= $post['created'] ?></p>
         </div>
     <?php endforeach; ?>
 <?php else: ?>
