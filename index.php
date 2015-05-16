@@ -32,7 +32,7 @@
     <label>Title: <input type="text" name="post[title]"/></label>
     <label>name: <input type="text" name="post[name]"/></label>
     <label>Body: <input type="text" name="post[body]"/></label>
-    <label>Password: <input type="password" name="post[password]" value="<?= $_COOKIE['password']?>"/></label>
+    <label>Password: <input type="password" name="post[password]" value="<?=$prev_password?>"/></label>
     <input type="submit" value="Submit" />
 </form>
 </div><!-- .form-box -->
@@ -58,7 +58,7 @@
 <h2>Delete Form</h2>
 <form taget="form.php" method="post">
     <label>Post ID: <input type="text" name="delete[id]"/></label>
-    <label>Password: <input type="password" name="delete[password]" value="<?= $_COOKIE['password']?>"/></label>
+    <label>Password: <input type="password" name="delete[password]" value="<?=$prev_password?>"/></label>
     <input type="submit" value="Submit" />
 </form>
 

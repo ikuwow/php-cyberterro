@@ -54,5 +54,7 @@ if (isset($_POST['delete'])) {
 $sql = 'SELECT * FROM posts WHERE deleted IS NULL ORDER BY created DESC LIMIT 10;';
 $stmt = $pdo->query($sql);
 $posts = $stmt->fetchAll();
+$prev_password = isset($_COOKIE['password']) ? $_COOKIE['password'] : '';
 $sql_dump[] = $stmt->queryString;
+
 
