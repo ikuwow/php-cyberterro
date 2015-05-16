@@ -78,9 +78,11 @@
     <h5>$_POST</h5>
     <pre><?= var_dump($_POST) ?></pre>
 
-    <?php if (false): ?>
     <h5>$_SESSION</h5>
-    <pre><?= var_dump($_SESSION) ?></pre>
+    <?php if (isset($_SESSION)): ?>
+        <pre><?= var_dump($_SESSION) ?></pre>
+    <?php else: ?>
+        <pre>Undefined</pre>
     <?php endif; ?>
 </div>
 
