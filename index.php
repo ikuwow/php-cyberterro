@@ -12,6 +12,13 @@
 <div class="flash-box flash-<?=$flashMessage["status"]?>">
     <span class="flash-kind"><?=strtoupper($flashMessage["status"])?>: </span>
     <?= $flashMessage["message"] ?>
+
+<?php if (isset($flashMessage["debug"])): ?>
+    <div class="flash-debug">
+    <?= $flashMessage["debug"]?>
+    </div>
+<?php endif;?>
+
 </div>
 <?php endif; ?>
 
@@ -23,6 +30,7 @@
 
 <form taget="form.php" method="post">
     <label>Title: <input type="text" name="post[title]"/></label>
+    <label>name: <input type="text" name="post[name]"/></label>
     <label>Body: <input type="text" name="post[body]"/></label>
     <label>Password: <input type="text" name="post[password]"/></label>
     <input type="submit" value="Submit" />

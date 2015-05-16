@@ -11,12 +11,11 @@ $flashMessage = [
 
 // 投稿処理
 if (!empty($_POST)) {
-    echo "Posted!!<br/>";
     $flashMessage = [
         "message" => "Posted!",
-        "status" => "success"
+        "status" => "success",
+        "debug" => "debugging"
     ];
-    var_dump($_POST);
 }
 
 // insert
