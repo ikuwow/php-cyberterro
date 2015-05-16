@@ -8,6 +8,10 @@
 
 <div class="container">
 
+<div class="flash-box">
+<?= $flashMessage ?>
+</div>
+
 <h1>Guest Book</h1>
 
 <p>Hello World.</p>
