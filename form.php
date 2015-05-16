@@ -13,14 +13,13 @@ $sql_dump = [];
 
 
 // 投稿処理
-/*
 if (!empty($_POST['post'])) {
 
     $in_post = $_POST['post'];
+    $_COOKIE['password'] = $in_post['password'];
 
     $sql = "INSERT INTO posts (title, name, body, password) VALUES
         ('{$in_post['title']}', '{$in_post['name']}', '{$in_post['body']}', '{$in_post['password']}');";
-    var_dump($sql);
     $stmt = $pdo->query($sql);
     $sql_dump[] = $stmt->queryString;
     $flashMessage = [
@@ -28,12 +27,15 @@ if (!empty($_POST['post'])) {
         'status' => 'success',
         'debug' => 'debugging'
     ];
+
 }
- */
 
 // 記事削除処理
 if (isset($_POST['delete'])) {
+
     $d = $_POST['delete'];
+    $_COOKIE['password'] = $d['password'];
+
     $sql = "UPDATE posts SET deleted = NOW() WHERE id = '{$d['id']}' AND password = '{$d['password']}';";
     $stmt = $pdo->query($sql);
     $sql_dump[] = $stmt->queryString;
