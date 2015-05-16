@@ -43,7 +43,7 @@
 <?php if(isset($posts)): ?>
     <?php foreach($posts as $post): ?>
         <div class="single-post">
-        <h3><?= $post['title'] ?></h3>
+        <h3><?= "ID {$post['id']}: {$post['title']}" ?></h3>
         <p><?= $post['name'] ?></p>
         <p><?= $post['body'] ?></p>
         <p><?= $post['created'] ?></p>
@@ -56,12 +56,19 @@
 
 
 <h2>Delete Form</h2>
-
 <form taget="form.php" method="post">
     <label>Post ID: <input type="text" name="delete[id]"/></label>
     <label>Password: <input type="text" name="delete[password]"/></label>
     <input type="submit" value="Submit" />
 </form>
+
+<div class="sql-dump-box">
+<h4>SQL Dump</h4>
+<?php foreach($sql_dump as $sql): ?>
+    <pre><?= $sql?></pre>
+<?php endforeach; ?>
+</div>
+
 
 </div><!-- .container -->
 <script type="text/javascript" src="./common.js"></script>

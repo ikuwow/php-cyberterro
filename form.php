@@ -9,25 +9,48 @@ $flashMessage = [
 ];
  */
 
+$sql_dump = [];
+
+
 // 投稿処理
-if (!empty($_POST)) {
+/*
+if (!empty($_POST['post'])) {
+
+    $in_post = $_POST['post'];
+
+    $sql = "INSERT INTO posts (title, name, body, password) VALUES
+        ('{$in_post['title']}', '{$in_post['name']}', '{$in_post['body']}', '{$in_post['password']}');";
+    var_dump($sql);
+    $stmt = $pdo->query($sql);
+    $sql_dump[] = $stmt->queryString;
     $flashMessage = [
-        "message" => "Posted!",
-        "status" => "success",
-        "debug" => "debugging"
+        'message' => 'Posted!',
+        'status' => 'success',
+        'debug' => 'debugging'
+    ];
+}
+ */
+
+// 記事削除処理
+if (isset($_POST['delete'])) {
+    $d = $_POST['delete'];
+    $sql = "UPDATE posts SET deleted = NOW() WHERE id = '{$d['id']}' AND password = '{$d['password']}';";
+    $stmt = $pdo->query($sql);
+    $sql_dump[] = $stmt->queryString;
+    $flashMessage = [
+        'message' => 'Deleted if password is correct.',
+        'status' => 'success'
     ];
 }
 
 
 // 同じ名前での投稿を無効にする
 
-// 記事削除処理
+// 自動入力処理
 
 // 記事表示処理
-
-$sql = "SELECT * from posts order by created desc limit 10;";
+$sql = 'SELECT * FROM posts WHERE deleted IS NULL ORDER BY created DESC LIMIT 10;';
 $stmt = $pdo->query($sql);
 $posts = $stmt->fetchAll();
-
-// 自動入力処理
+$sql_dump[] = $stmt->queryString;
 
