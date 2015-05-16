@@ -44,9 +44,9 @@
     <?php foreach($posts as $post): ?>
         <div class="single-post">
         <h3><?= "ID {$post['id']}: {$post['title']}" ?></h3>
-        <p><?= $post['name'] ?></p>
+        <p>Name: <?= $post['name'] ?></p>
         <p><?= $post['body'] ?></p>
-        <p><?= $post['created'] ?></p>
+        <p>Posted at <?= $post['created'] ?></p>
         </div>
     <?php endforeach; ?>
 <?php else: ?>
