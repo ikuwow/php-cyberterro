@@ -30,8 +30,8 @@
 <h2>Post Form:</h2>
 <form taget="form.php" method="post">
     <label>Title: <input type="text" name="post[title]"/></label>
-    <label>name: <input type="text" name="post[name]"/></label>
-    <label>Body: <input type="text" name="post[body]"/></label>
+    <label>name: <input type="text" name="post[name]"/></label><br/>
+    <label>Body: <textarea type="text" name="post[body]" rows="4" cols="40"/></textarea></label><br/>
     <label>Password: <input type="password" name="post[password]" value="<?=$prev_password?>"/></label>
     <input type="submit" value="Submit" />
 </form>
