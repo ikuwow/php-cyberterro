@@ -36,13 +36,31 @@ if (isset($_POST['delete'])) {
     $d = $_POST['delete'];
     $_COOKIE['password'] = $d['password'];
 
+    /* valnerable
     $sql = "UPDATE posts SET deleted = NOW() WHERE id = '{$d['id']}' AND password = '{$d['password']}';";
     $stmt = $pdo->query($sql);
+     */
+    $sql = "UPDATE posts SET deleted = NOW() WHERE id = :id AND password = :password";
+    $stmt = $pdo->prepare($sql);
+    $is_succeeded = $stmt->execute([
+        ':id' => $d['id'],
+        ':password' => $d['password']
+    ]);
+    // var_dump($is_succeeded);
+
+    if ($is_succeeded && $stmt->rowCount()>=1) {
+        $flashMessage = [
+            'message' => "Post ID {$d['id']} was sucessfully deleted.",
+            'status' => 'success'
+        ];
+    } else {
+        $flashMessage = [
+            'message' => "Post ID {$d['id']} could not deleted",
+            'status' => 'error'
+        ];
+    }
+
     $sql_dump[] = $stmt->queryString;
-    $flashMessage = [
-        'message' => 'Deleted if password is correct.',
-        'status' => 'success'
-    ];
 }
 
 
