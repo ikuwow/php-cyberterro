@@ -16,30 +16,50 @@ $sql_dump = [];
 if (!empty($_POST['post'])) {
 
     $in_post = $_POST['post'];
-    $_COOKIE['password'] = $in_post['password'];
 
-    $sql = "INSERT INTO posts (title, name, body, password) VALUES (:title, :name, :body, :password);";
+    // ユーザー確認
+    $sql = 'SELECT count(id) FROM posts WHERE name = :name AND password != :password';
     $stmt = $pdo->prepare($sql);
-    $is_succeeded = $stmt->execute([
-        ':title' => $in_post['title'],
+    $stmt->execute([
         ':name' => $in_post['name'],
-        ':body' => $in_post['body'],
-        ':password' => $in_post['password'],
+        ':password' => $in_post['password']
     ]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($is_succeeded && $stmt->rowCount()>=1) {
+    if ($result['count'] > 0) {
+
         $flashMessage = [
-            'message' => "Post title {$in_post['title']} was sucessfully created!",
-            'status' => 'success'
-        ];
-    } else {
-        $flashMessage = [
-            'message' => "Post title {$in_post['title']} could not posted...",
+            'message' => "User {$in_post['name']}'s password is wrong!!",
             'status' => 'error'
         ];
-    }
 
-    $sql_dump[] = $stmt->queryString;
+    } else {
+
+        $sql = "INSERT INTO posts (title, name, body, password) VALUES (:title, :name, :body, :password);";
+        $stmt = $pdo->prepare($sql);
+        $is_succeeded = $stmt->execute([
+            ':title' => $in_post['title'],
+            ':name' => $in_post['name'],
+            ':body' => $in_post['body'],
+            ':password' => $in_post['password'],
+        ]);
+
+        if ($is_succeeded && $stmt->rowCount()>=1) {
+            $flashMessage = [
+                'message' => "Post title {$in_post['title']} was sucessfully created!",
+                'status' => 'success'
+            ];
+        } else {
+            $flashMessage = [
+                'message' => "Post title {$in_post['title']} could not posted...",
+                'status' => 'error'
+            ];
+        }
+
+        $_COOKIE['password'] = $in_post['password'];
+
+        $sql_dump[] = $stmt->queryString;
+    }
 
 }
 

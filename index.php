@@ -45,7 +45,7 @@
 
 <div class="post-list-box">
 <h2>Post List (<?= count($posts) ?>)</h2>
-<?php if(isset($posts)): ?>
+<?php if(count($posts)>=1): ?>
     <?php foreach($posts as $post): ?>
         <div class="single-post">
         <h3><?= h("ID {$post['id']}: {$post['title']}") ?></h3>
