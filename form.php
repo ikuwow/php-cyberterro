@@ -18,15 +18,28 @@ if (!empty($_POST['post'])) {
     $in_post = $_POST['post'];
     $_COOKIE['password'] = $in_post['password'];
 
-    $sql = "INSERT INTO posts (title, name, body, password) VALUES
-        ('{$in_post['title']}', '{$in_post['name']}', '{$in_post['body']}', '{$in_post['password']}');";
-    $stmt = $pdo->query($sql);
+    $sql = "INSERT INTO posts (title, name, body, password) VALUES (:title, :name, :body, :password);";
+    $stmt = $pdo->prepare($sql);
+    $is_succeeded = $stmt->execute([
+        ':title' => $in_post['title'],
+        ':name' => $in_post['name'],
+        ':body' => $in_post['body'],
+        ':password' => $in_post['password'],
+    ]);
+
+    if ($is_succeeded && $stmt->rowCount()>=1) {
+        $flashMessage = [
+            'message' => "Post title {$in_post['title']} was sucessfully created!",
+            'status' => 'success'
+        ];
+    } else {
+        $flashMessage = [
+            'message' => "Post title {$in_post['title']} could not posted...",
+            'status' => 'error'
+        ];
+    }
+
     $sql_dump[] = $stmt->queryString;
-    $flashMessage = [
-        'message' => 'Posted!',
-        'status' => 'success',
-        'debug' => 'debugging'
-    ];
 
 }
 
