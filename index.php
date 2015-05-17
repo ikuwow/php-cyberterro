@@ -9,6 +9,10 @@
 
 <div class="container">
 
+<?php if (isset($_GET['msg'])) : ?>
+    <?php echo h($_GET['msg']); ?>
+<?php endif;?>
+
 <?php if (isset($flashMessage)): ?>
 <div class="flash-box flash-<?=$flashMessage["status"]?>">
     <span class="flash-kind"><?=strtoupper($flashMessage["status"])?>: </span>
@@ -78,6 +82,9 @@
 
     <h5>$_POST</h5>
     <pre><?= h(var_dump($_POST)) ?></pre>
+
+    <h5>$_GET</h5>
+    <pre><?= h(var_dump($_GET)) ?></pre>
 
     <h5>$_SESSION</h5>
     <?php if (isset($_SESSION)): ?>
