@@ -1,4 +1,5 @@
 <?php require_once 'form.php'; ?>
+<?php require_once 'functions.php'; ?>
 <html lang="ja">
 <head>
     <meta charset="utf-8"/>
@@ -43,9 +44,9 @@
 <?php if(isset($posts)): ?>
     <?php foreach($posts as $post): ?>
         <div class="single-post">
-        <h3><?= "ID {$post['id']}: {$post['title']}" ?></h3>
-        <p>Name: <?= $post['name'] ?></p>
-        <p><?= $post['body'] ?></p>
+        <h3><?= h("ID {$post['id']}: {$post['title']}") ?></h3>
+        <p>Name: <?= h($post['name']) ?></p>
+        <p><?= h($post['body']) ?></p>
         <p>Posted at <?= $post['created'] ?></p>
         </div>
     <?php endforeach; ?>
@@ -65,7 +66,7 @@
 <div class="sql-dump-box">
 <h4>SQL Dump</h4>
 <?php foreach($sql_dump as $sql): ?>
-    <pre><?= $sql?></pre>
+    <pre><?= h($sql)?></pre>
 <?php endforeach; ?>
 </div>
 
@@ -73,14 +74,14 @@
     <h4>Var Dump</h4>
 
     <h5>$_COOKIE</h5>
-    <pre><?= var_dump($_COOKIE) ?></pre>
+    <pre><?= h(var_dump($_COOKIE)) ?></pre>
 
     <h5>$_POST</h5>
-    <pre><?= var_dump($_POST) ?></pre>
+    <pre><?= h(var_dump($_POST)) ?></pre>
 
     <h5>$_SESSION</h5>
     <?php if (isset($_SESSION)): ?>
-        <pre><?= var_dump($_SESSION) ?></pre>
+        <pre><?= h(var_dump($_SESSION)) ?></pre>
     <?php else: ?>
         <pre>Undefined</pre>
     <?php endif; ?>
@@ -88,7 +89,9 @@
 
 
 </div><!-- .container -->
+
 <script type="text/javascript" src="./common.js"></script>
+
 </body>
 </html>
 
